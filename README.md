@@ -32,17 +32,17 @@ templates/
 
 ## Install
 
-Both agents, from this directory on disk (what was verified), with the
-[skills CLI](https://skills.sh):
+Both agents, with the [skills CLI](https://skills.sh), from the repo
+(`gh` must be logged in while it is private):
 
 ```sh
-npx skills add /path/to/fe-experiments-skill --skill fe-experiments -a claude-code -a codex -y
+npx skills add khangtoh/fe-experiments --skill fe-experiments -a claude-code -a codex -y
 ```
 
 That writes the real files to `.agents/skills/fe-experiments/` (Codex reads
-them there) and symlinks `.claude/skills/fe-experiments` to it (Claude Code).
-Once this repo is on GitHub the same command takes the `owner/repo` slug in
-place of the path; that form has not been run yet. Without the CLI, copy
+them there), symlinks `.claude/skills/fe-experiments` to it (Claude Code), and
+records the source in `skills-lock.json`. A local checkout works in place of
+the slug (`npx skills add /path/to/checkout …`). Without the CLI, copy
 `skills/fe-experiments/` to `.agents/skills/` and symlink or copy it into
 `.claude/skills/`; the scripts resolve their own location, so either works.
 
@@ -96,15 +96,16 @@ against a scratch copy of fdeploy's `index.html`:
   served `/fe-experiments` (Decided · D-28, Chosen), `/fe-experiments/mission`,
   the page, a 404, and the 301 for an old flat URL.
 - `wait-deploy.sh` returned 0 for fdeploy's deployed HEAD in about a second.
-- `npx skills add` installed the package for both agents, and the scripts ran
+- `npx skills add khangtoh/fe-experiments` installed the package for both
+  agents (and from a local path before it was pushed), and the scripts ran
   from `.agents/skills/fe-experiments/`.
 
 ## Switching fdeploy_www to this package
 
 The original still lives at `fdeploy_www/.claude/skills/fe-experiments/`
 (SKILL.md plus four scripts, one of which needs the `gstack browse` binary).
-To replace it: push this repo, run the install command above in `fdeploy_www`
-(with the `owner/repo` slug), delete the old directory, copy
+To replace it: run the install command above in `fdeploy_www`, delete the old
+directory, copy
 `templates/fe-experiments.config.json` to the root and
 `templates/fe-experiments.rules.md` to `spec/`, and `bun add -d playwright-core`.
 `api/index.js` already serves the listing, so the router is not needed there.
