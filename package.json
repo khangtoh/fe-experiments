@@ -1,0 +1,16 @@
+{
+  "name": "fe-experiments-skill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agent skill: run /impeccable design passes as deployed full-page experiments, then decide a winner. For Claude Code and Codex.",
+  "license": "MIT",
+  "dependencies": {
+    "playwright-core": "^1.63.0"
+  },
+  "peerDependencies": {
+    "express": ">=4"
+  },
+  "peerDependenciesMeta": {
+    "express": { "optional": true }
+  }
+}

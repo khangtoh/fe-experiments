@@ -1,0 +1,11 @@
+{
+  "name": "fdeploy",
+  "dir": "fe-experiments",
+  "site": "https://fdeploy.ai",
+  "pages": { "index.html": "/", "forge/index.html": "/forge" },
+  "rules": "spec/fe-experiments-rules.md",
+  "product": "PRODUCT.md",
+  "ledger": { "file": "spec/01-launch-decisions.md", "prefix": "D" },
+  "deploy": { "branch": "main", "status": "Vercel" },
+  "check": { "widths": [1440, 420], "port": 8765 }
+}

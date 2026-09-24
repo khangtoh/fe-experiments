@@ -1,0 +1,4 @@
+interface:
+  display_name: "fe-experiments"
+  short_description: "Design variants as full pages, deployed for review; decide a winner"
+  default_prompt: "Use $fe-experiments <impeccable command> <target> to explore design variants of a page as deployed full-page experiments, or $fe-experiments decide <run> <letter> to apply a winner."
