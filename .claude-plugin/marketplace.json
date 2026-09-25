@@ -1,0 +1,14 @@
+{
+  "name": "fe-experiments",
+  "owner": {
+    "name": "Khang Toh"
+  },
+  "plugins": [
+    {
+      "name": "fe-experiments",
+      "source": "./",
+      "description": "Run /impeccable design passes as deployed full-page experiments, then decide a winner"
+    }
+  ],
+  "description": "fe-experiments: deployed full-page design experiments for Claude Code"
+}

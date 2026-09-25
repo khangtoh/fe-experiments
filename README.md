@@ -32,19 +32,40 @@ templates/
 
 ## Install
 
-Both agents, with the [skills CLI](https://skills.sh), from the repo
-(`gh` must be logged in while it is private):
+Three routes, one repo. Pick the one for your agent.
+
+**Any agent, with the [skills CLI](https://skills.sh)** (Claude Code, Codex,
+Cursor and others). Writes the files to `.agents/skills/fe-experiments/`, symlinks
+each agent's own skills directory to it, and records the source in `skills-lock.json`:
 
 ```sh
 npx skills add khangtoh/fe-experiments --skill fe-experiments -a claude-code -a codex -y
 ```
 
-That writes the real files to `.agents/skills/fe-experiments/` (Codex reads
-them there), symlinks `.claude/skills/fe-experiments` to it (Claude Code), and
-records the source in `skills-lock.json`. A local checkout works in place of
-the slug (`npx skills add /path/to/checkout …`). Without the CLI, copy
-`skills/fe-experiments/` to `.agents/skills/` and symlink or copy it into
-`.claude/skills/`; the scripts resolve their own location, so either works.
+**Codex, with its built-in installer.** Inside a Codex session:
+
+```
+$skill-installer install skills/fe-experiments from khangtoh/fe-experiments
+```
+
+It installs to `~/.codex/skills/fe-experiments` (user level; a repo-level
+install is the skills CLI route above).
+
+**Claude Code, as a plugin.** The repo is its own marketplace
+(`.claude-plugin/marketplace.json`), so this installs it with updates
+(`claude plugin update fe-experiments@fe-experiments`) and a `/plugin` listing:
+
+```sh
+claude plugin marketplace add khangtoh/fe-experiments
+claude plugin install fe-experiments@fe-experiments
+```
+
+Installed as a plugin, the skill is invoked as `/fe-experiments:fe-experiments`;
+installed as a skill, as `/fe-experiments`. Don't do both in one project, or two
+copies load.
+
+Without any tool, copy `skills/fe-experiments/` to `.agents/skills/` and symlink
+or copy it into `.claude/skills/`; the scripts resolve their own location.
 
 ## Host setup
 
@@ -98,7 +119,11 @@ against a scratch copy of fdeploy's `index.html`:
 - `wait-deploy.sh` returned 0 for fdeploy's deployed HEAD in about a second.
 - `npx skills add khangtoh/fe-experiments` installed the package for both
   agents (and from a local path before it was pushed), and the scripts ran
-  from `.agents/skills/fe-experiments/`.
+  from `.agents/skills/fe-experiments/`. Codex's `skill-installer` script
+  fetched the skill directory intact from the public repo.
+- `claude plugin validate --strict .` passes; `claude plugin marketplace add
+  khangtoh/fe-experiments` and `claude plugin install
+  fe-experiments@fe-experiments` installed and enabled it.
 
 ## Switching fdeploy_www to this package
 

@@ -1,0 +1,11 @@
+{
+  "name": "fe-experiments",
+  "displayName": "fe-experiments",
+  "description": "Run /impeccable design passes as deployed full-page experiments, then decide a winner",
+  "version": "1.0.0",
+  "author": { "name": "Khang Toh" },
+  "homepage": "https://github.com/khangtoh/fe-experiments",
+  "repository": "https://github.com/khangtoh/fe-experiments",
+  "license": "MIT",
+  "keywords": ["design", "impeccable", "experiments", "frontend"]
+}
